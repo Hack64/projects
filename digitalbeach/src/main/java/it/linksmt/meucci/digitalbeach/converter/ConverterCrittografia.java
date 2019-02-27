@@ -8,18 +8,21 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.AttributeConverter;
 
 public class ConverterCrittografia implements AttributeConverter<String, String>{
-
+	
+	Cipher cipher;
+	String key = "Bar12345Bar12345"; // 128 bit key
+	Key aesKey;
+	
 	@Override
 	public String convertToDatabaseColumn(String attribute) {
 		
 		try {
-			String toEncrypt = attribute;
-			final String chiave = "p2s5v8y/B?E(G+Kb";
-			final Key chiaveAES = new SecretKeySpec(chiave.getBytes(), "AES");
-			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.ENCRYPT_MODE, chiaveAES);
-			byte[] encrypted = Base64.getEncoder().encode(cipher.doFinal(toEncrypt.getBytes()));
-			return encrypted.toString();
+			   String toEncrypt = attribute;
+			   aesKey = new SecretKeySpec(key.getBytes(), "AES");
+	           cipher = Cipher.getInstance("AES");  
+	           cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+	           String encrypted = new String(Base64.getEncoder().encode(cipher.doFinal(toEncrypt.getBytes())), "UTF-8");
+	           return encrypted;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -30,13 +33,12 @@ public class ConverterCrittografia implements AttributeConverter<String, String>
 	@Override
 	public String convertToEntityAttribute(String dbData) {
 		try {
-		final String chiave = "p2s5v8y/B?E(G+Kb";
-		final Key chiaveAES = new SecretKeySpec(chiave.getBytes(), "AES");
-		String toDecrypt = dbData;
-		Cipher cipher = Cipher.getInstance("AES");
-		cipher.init(Cipher.DECRYPT_MODE, chiaveAES);
-		String decrypted = new String(cipher.doFinal(Base64.getDecoder().decode(toDecrypt.getBytes())));
-		return decrypted;
+			   String toDecrypt = dbData;
+			   aesKey = new SecretKeySpec(key.getBytes(), "AES");
+			   cipher = Cipher.getInstance("AES");
+	           cipher.init(Cipher.DECRYPT_MODE, aesKey);
+	           String decrypted = new String (cipher.doFinal(Base64.getDecoder().decode(toDecrypt.getBytes())), "UTF-8");
+	           return decrypted;
 		}
 		catch(Exception e) {
 			e.printStackTrace();

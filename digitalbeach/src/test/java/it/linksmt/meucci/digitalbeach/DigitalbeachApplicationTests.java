@@ -57,9 +57,9 @@ public class DigitalbeachApplicationTests {
 	@Test
 	public void getUser() {
 		
-		Optional<Utente> storedUtente = repositoryUtente.findById("46be2f79-2732-48e3-a2ad-b536e0f3d5e7");
-		storedUtente.get().getNome();
-		storedUtente.get().getCognome();
+		Optional<Utente> storedUtente = repositoryUtente.findById("9c1406a5-c6ea-40fc-8afb-ec74a18877b7");
+		System.out.println(storedUtente.get().getNome());
+		System.out.println(storedUtente.get().getCognome());
 	}
 }
 
