@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import it.linksmt.meucci.digitalbeach.entity.Credenziale;
 import it.linksmt.meucci.digitalbeach.entity.Utente;
+import it.linksmt.meucci.digitalbeach.repository.RepositoryCredenziale;
 import it.linksmt.meucci.digitalbeach.repository.RepositoryPostazione;
 import it.linksmt.meucci.digitalbeach.repository.RepositoryPrenotazione;
 import it.linksmt.meucci.digitalbeach.repository.RepositorySpiaggia;
@@ -30,6 +32,9 @@ public class DigitalbeachApplicationTests {
 	
 	@Autowired
 	private RepositoryUtente repositoryUtente;
+	
+	@Autowired
+	private RepositoryCredenziale repositoryCredenziale;
 	
 	@Test
 	public void contextLoads() {
@@ -54,6 +59,24 @@ public class DigitalbeachApplicationTests {
 		System.out.println("Debug");
 	}
 	
+	@Test
+	public void insertUserAndCredentials() {
+		Utente utente = new Utente();
+		Credenziale credenziale = new Credenziale();
+		Date d = new Date(100, 3, 4);
+		utente.setCodFiscale("RZZMRC00");
+		utente.setCognome("Rizzo");
+		utente.setNome("Marco");
+		utente.setDataNascita(d);
+		utente.setNumeroTelefonico("+393478819527");
+		utente.setSesso("Uomo");
+		utente.setTipoUtente("Amministratore");
+		credenziale.setEmail("marco@rizzo.com");
+		credenziale.setPassword("hello");
+		repositoryUtente.save(utente);
+		repositoryCredenziale.save(credenziale);
+		
+	}
 	@Test
 	public void getUser() {
 		

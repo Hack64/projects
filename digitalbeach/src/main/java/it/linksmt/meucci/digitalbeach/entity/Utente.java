@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import it.linksmt.meucci.digitalbeach.converter.ConverterCrittografia;
 
 @Entity
 @Table(name="utente")
@@ -32,8 +29,6 @@ public class Utente implements Serializable {
 	private String UUIDCliente;
 	
 	private String Nome;
-	
-	@Convert(converter=ConverterCrittografia.class)
 	private String Cognome;
 	private String CodFiscale;
 	private String TipoUtente;

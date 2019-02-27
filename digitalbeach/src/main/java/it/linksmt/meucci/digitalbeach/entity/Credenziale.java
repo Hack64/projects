@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -11,6 +12,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import it.linksmt.meucci.digitalbeach.converter.ConverterCrittografia;
 
 @Entity
 @Table(name="credenziale")
@@ -20,13 +23,14 @@ public class Credenziale implements Serializable {
 	
 	@Id
 	private String email;
+	@Convert(converter=ConverterCrittografia.class)
 	private String password;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@MapsId
 	private Utente utente;
 	
-	@OneToMany(mappedBy="recupero", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="credenziale", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Recupero> recuperi;
 
 	
