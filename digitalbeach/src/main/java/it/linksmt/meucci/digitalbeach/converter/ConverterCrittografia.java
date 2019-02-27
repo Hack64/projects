@@ -10,7 +10,7 @@ import javax.persistence.AttributeConverter;
 public class ConverterCrittografia implements AttributeConverter<String, String>{
 	
 	Cipher cipher;
-	String key = "Bar12345Bar12345"; // 128 bit key
+	final String key = "KbPeShVmYq3t6w9z";
 	Key aesKey;
 	
 	@Override
