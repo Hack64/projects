@@ -1,6 +1,7 @@
 package it.linksmt.meucci.digitalbeach.converter;
 
 import java.security.Key;
+import java.util.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,7 +18,7 @@ public class ConverterCrittografia implements AttributeConverter<String, String>
 			final Key chiaveAES = new SecretKeySpec(chiave.getBytes(), "AES");
 			Cipher cipher = Cipher.getInstance("AES");
 			cipher.init(Cipher.ENCRYPT_MODE, chiaveAES);
-			byte[] encrypted = cipher.doFinal(toEncrypt.getBytes());
+			byte[] encrypted = Base64.getEncoder().encode(cipher.doFinal(toEncrypt.getBytes()));
 			return encrypted.toString();
 		}
 		catch(Exception e) {
@@ -34,7 +35,7 @@ public class ConverterCrittografia implements AttributeConverter<String, String>
 		String toDecrypt = dbData;
 		Cipher cipher = Cipher.getInstance("AES");
 		cipher.init(Cipher.DECRYPT_MODE, chiaveAES);
-		String decrypted = new String(cipher.doFinal(toDecrypt.getBytes()));
+		String decrypted = new String(cipher.doFinal(Base64.getDecoder().decode(toDecrypt.getBytes())));
 		return decrypted;
 		}
 		catch(Exception e) {

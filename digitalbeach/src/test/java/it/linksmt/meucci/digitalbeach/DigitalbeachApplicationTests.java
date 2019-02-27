@@ -1,7 +1,7 @@
 package it.linksmt.meucci.digitalbeach;
 
 import java.util.Date;
-import java.util.UUID;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +39,7 @@ public class DigitalbeachApplicationTests {
 	@Test
 	public void insertUser() {
 		Utente utente = new Utente();
+		@SuppressWarnings("deprecation")
 		Date d = new Date(100, 3, 4);
 		utente.setCodFiscale("RZZMRC00");
 		utente.setCognome("Rizzo");
@@ -51,6 +52,14 @@ public class DigitalbeachApplicationTests {
 		repositoryUtente.save(utente);
 		
 		System.out.println("Debug");
+	}
+	
+	@Test
+	public void getUser() {
+		
+		Optional<Utente> storedUtente = repositoryUtente.findById("46be2f79-2732-48e3-a2ad-b536e0f3d5e7");
+		storedUtente.get().getNome();
+		storedUtente.get().getCognome();
 	}
 }
 
