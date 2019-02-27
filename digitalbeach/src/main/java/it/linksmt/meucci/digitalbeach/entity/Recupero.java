@@ -3,6 +3,8 @@ package it.linksmt.meucci.digitalbeach.entity;
 import java.io.Serializable;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 public class Recupero implements Serializable {
 
@@ -12,6 +14,10 @@ public class Recupero implements Serializable {
 	private String IDRecupero;
 	private String domanda;
 	private String risposta;
+	
+	@ManyToOne
+	@JoinColumn(name="email", nullable=false)
+	private Credenziale credenziale;
 	
 	public String getIDRecupero() {
 		return IDRecupero;

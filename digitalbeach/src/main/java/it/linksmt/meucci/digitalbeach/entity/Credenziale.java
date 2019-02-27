@@ -1,9 +1,15 @@
 package it.linksmt.meucci.digitalbeach.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +21,13 @@ public class Credenziale implements Serializable {
 	@Id
 	private String email;
 	private String password;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@MapsId
+	private Utente utente;
+	
+	@OneToMany(mappedBy="recupero", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<Recupero> recuperi;
 
 	
 	public String getEmail() {
