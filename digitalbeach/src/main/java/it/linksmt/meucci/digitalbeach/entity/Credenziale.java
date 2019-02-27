@@ -8,7 +8,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,7 +27,7 @@ public class Credenziale implements Serializable {
 	private String password;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@MapsId
+	@JoinColumn(name="UUIDCliente", nullable=false)
 	private Utente utente;
 	
 	@OneToMany(mappedBy="credenziale", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
