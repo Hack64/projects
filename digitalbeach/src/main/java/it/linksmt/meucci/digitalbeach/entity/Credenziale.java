@@ -26,11 +26,11 @@ public class Credenziale implements Serializable {
 	@Convert(converter=ConverterCrittografia.class)
 	private String password;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="UUIDCliente", nullable=false)
 	private Utente utente;
 	
-	@OneToMany(mappedBy="credenziale", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="credenziale", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Recupero> recuperi;
 
 	
