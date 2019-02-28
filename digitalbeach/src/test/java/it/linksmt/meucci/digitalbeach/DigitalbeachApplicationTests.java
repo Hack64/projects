@@ -84,5 +84,10 @@ public class DigitalbeachApplicationTests {
 		System.out.println(storedUtente.get().getNome());
 		System.out.println(storedUtente.get().getCognome());
 	}
+	
+	@Test
+	public void deleteUser() {
+		repositoryUtente.deleteById("");
+	}
 }
 
