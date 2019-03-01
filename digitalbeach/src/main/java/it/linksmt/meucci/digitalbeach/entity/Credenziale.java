@@ -26,6 +26,7 @@ public class Credenziale implements Serializable {
 	@Convert(converter=ConverterCrittografia.class)
 	private String password;
 	
+	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="UUIDCliente", nullable=false)
 	private Utente utente;

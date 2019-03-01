@@ -73,6 +73,7 @@ public class DigitalbeachApplicationTests {
 		utente.setTipoUtente("Amministratore");
 		credenziale.setEmail("marco@rizzo.com");
 		credenziale.setPassword("hello");
+		credenziale.
 		repositoryUtente.save(utente);
 		repositoryCredenziale.save(credenziale);
 		
